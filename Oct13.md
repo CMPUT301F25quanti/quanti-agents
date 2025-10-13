@@ -27,7 +27,7 @@ Discussed story board (Hetang had worked on a great UI mockup coming into the me
 |                   | US 02.03.01 As an organizer I want to limit number of entrants on my waiting list            | 2       | Low    |
 +-------------------+----------------------------------------------------------------------------------------------+---------+--------+
 | Geo               | US 02.02.02 As an organizer I want to see map locations of entrants                          | 4       | Medium |
-|                   | US 02.02.03 As an organizer I want to enable/disable the geolocation requirement             | 4      | Medium |
+|                   | US 02.02.03 As an organizer I want to enable/disable the geolocation requirement             | 4       | Medium |
 +-------------------+----------------------------------------------------------------------------------------------+---------+--------+
 | Device Info       | US 01.02.01 As an entrant, I want to provide personal info (name, email, phone)              | 1       | Low    |
 |                   | US 01.02.02 As an entrant, I want to update personal info on my profile                      | 1       | Low    |
