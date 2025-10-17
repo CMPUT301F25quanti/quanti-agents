@@ -1,6 +1,5 @@
-# 📝 Meeting Minutes Template
+# 📝 October 16th Meeting
 
-**Oct 16 Meeting:**  
 **Date:** 2025-10-16  
 **Time:** 18:30 – 19:00  
 **Location / Platform:** In-Person(On Campus during Lab Session)
