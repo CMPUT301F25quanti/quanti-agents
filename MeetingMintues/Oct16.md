@@ -39,7 +39,7 @@
 
 ## 💬 Discussion Summary
 
-**1. [Feedback on Roles and User Capabilities]**
+**1. Feedback on Roles and User Capabilities**
 
 - ## Key points:
     - Regular users should be able to create and join events.
@@ -50,7 +50,7 @@
   - Responsible: Dotun, Hetang, Noel
   - Due: Oct 20th Meeting at 9:00pm
 
-**2. [Mockups and Storyboard Sequences]**
+**2. Mockups and Storyboard Sequences**
 
 - ## Key points:
     - TA liked mockups and gave suggestions.
