@@ -38,6 +38,8 @@
 - Subissues also need a risk and time estimate, apart from the main issue
 - The entire team will be docked points for the meetings if someone doesn't show up, though the person that missed it loses the most
 
+- Unit testing, Javadocs and UML need to be made in project part 3
+
 ---
 
 ## 💬 Meeting on Friday, Oct 24 at 5:00pm
@@ -47,5 +49,5 @@
 ---
 
 _**Prepared by:**_ Noel De Roij (deroij)
-_**Version:**_ 1.0  
+_**Version:**_ 1.1  
 _**Last Updated:** 2025-10-23_
