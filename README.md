@@ -1,6 +1,16 @@
 # quanti-agents
 CMPUT 301 project
 
+## Link to CRC Cards on Wiki:
+[CRC Cards](https://github.com/CMPUT301F25quanti/quanti-agents/wiki/CRC-Cards)
+
+## Link to User Interface Mockup on Wiki:
+[User Interface Mockup](https://github.com/CMPUT301F25quanti/quanti-agents/wiki/User-Interface-Mockup)
+
+## Link to Storyboard on Wiki:
+[Storyboard](https://github.com/CMPUT301F25quanti/quanti-agents/wiki/Storyboard)
+
+
 ## First 50% (Project Part 3)
 
 | Story | Risk |
