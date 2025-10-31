@@ -30,8 +30,10 @@ All team members were present:
 ---
 
 ## 3. Action Items and Deadlines  
-- Dotun shall divide user stories among team members by Thursday 11pm.  
-- All members shall start working on their user stories and explain progress during next meeting - Sunday, November 2nd - 4pm  
+- Dotun shall divide user stories among team members - Thursday, October 30th - 11pm.
+- Correct UML arrows - Sunday, November 2nd - 4pm
+- All members shall start working on their user stories and explain progress during next meeting - Sunday, November 2nd - 4pm
+ 
 
 ---
 
