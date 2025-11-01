@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+.vscode/
+.gradle/
+.gradle-home/
+/local.properties
+/app/build/
+/build/

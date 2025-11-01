@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_browse_events"
+            android:title="@string/nav_item_browse" />
+        <item
+            android:id="@+id/navigation_my_events"
+            android:title="@string/nav_item_my_events" />
+        <item
+            android:id="@+id/navigation_create_event"
+            android:title="@string/nav_item_create_event" />
+        <item
+            android:id="@+id/navigation_manage_events"
+            android:title="@string/nav_item_manage_events" />
+        <item
+            android:id="@+id/navigation_scan_qr"
+            android:title="@string/nav_item_scan_qr" />
+        <item
+            android:id="@+id/navigation_notifications"
+            android:title="@string/nav_item_notifications" />
+        <item
+            android:id="@+id/navigation_profile"
+            android:title="@string/nav_item_profile" />
+        <item
+            android:id="@+id/navigation_settings"
+            android:title="@string/nav_item_settings" />
+    </group>
+
+    <item
+        android:id="@+id/navigation_logout"
+        android:title="@string/nav_item_logout" />
+
+</menu>
