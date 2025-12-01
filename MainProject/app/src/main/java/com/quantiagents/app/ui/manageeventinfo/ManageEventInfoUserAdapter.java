@@ -101,7 +101,8 @@ public class ManageEventInfoUserAdapter
 
         // Temporary placeholders while user lookup happens
         holder.nameText.setText(fallbackId);
-        holder.infoText.setText("Username: @" + fallbackId);
+        holder.emailText.setText("");
+        holder.phoneText.setText("");
 
         // Show/hide the trash icon based on the current tab
         if (holder.cancelButton != null) {
@@ -126,34 +127,29 @@ public class ManageEventInfoUserAdapter
             User u = userService.getUserById(reg.getUserId());
 
             String displayName = fallbackId;
-            String username = fallbackId;
+            String email = "";
+            String phone = "";
 
             if (u != null) {
                 if (u.getName() != null && !u.getName().trim().isEmpty()) {
                     displayName = u.getName().trim();
                 }
-                // Using email as username for now
                 if (u.getEmail() != null && !u.getEmail().trim().isEmpty()) {
-                    username = u.getEmail().trim();
+                    email = u.getEmail().trim();
+                }
+                if (u.getPhone() != null && !u.getPhone().trim().isEmpty()) {
+                    phone = u.getPhone().trim();
                 }
             }
 
-            String joined = formatJoined(reg); // hook up real date here if you have it
-
             final String finalDisplayName = displayName;
-            final String finalUsername = username;
-            final String finalJoined = joined;
+            final String finalEmail = email;
+            final String finalPhone = phone;
 
             holder.itemView.post(() -> {
                 holder.nameText.setText(finalDisplayName);
-
-                StringBuilder sb = new StringBuilder();
-                sb.append("Username: @").append(finalUsername);
-                if (!finalJoined.isEmpty()) {
-                    sb.append("\nJoined: ").append(finalJoined);
-                }
-
-                holder.infoText.setText(sb.toString());
+                holder.emailText.setText(finalEmail);
+                holder.phoneText.setText(finalPhone);
             });
         });
     }
@@ -164,14 +160,16 @@ public class ManageEventInfoUserAdapter
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
-        final TextView nameText;   // Line 1
-        final TextView infoText;   // Line 2 + 3
+        final TextView nameText;
+        final TextView emailText;
+        final TextView phoneText;
         final ImageButton cancelButton;
 
         UserViewHolder(@NonNull View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.text_user_name);
-            infoText = itemView.findViewById(R.id.text_user_info);
+            emailText = itemView.findViewById(R.id.text_user_email);
+            phoneText = itemView.findViewById(R.id.text_user_phone);
             cancelButton = itemView.findViewById(R.id.button_cancel_user);
         }
     }

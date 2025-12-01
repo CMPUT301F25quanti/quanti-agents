@@ -10,39 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="@dimen/spacing_outer">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="16dp"
             android:text="@string/profile_title"
-            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-            android:textColor="@color/colorOnSurface"
+            android:textSize="@dimen/text_size_title"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/profile_subtitle"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/profile_subtitle"
+            android:textSize="@dimen/text_size_caption"
+            android:textColor="@color/textSecondary"/>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            app:strokeColor="@color/borderColor"
-            app:cardCornerRadius="18dp"
-            app:strokeWidth="1dp">
+            android:layout_marginBottom="@dimen/spacing_vertical"
+            app:cardBackgroundColor="@color/white_background"
+            app:strokeColor="@color/light_grey_border"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:strokeWidth="@dimen/card_border_width"
+            app:cardElevation="@dimen/card_elevation">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="@dimen/spacing_card_padding_large">
 
                 <!--TextView
                     android:layout_width="match_parent"
@@ -54,12 +56,51 @@
 
                 </TextView-->
 
+                <!-- First Name Field -->
                 <TextView
-                    android:id="@+id/text_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                    android:textColor="@color/colorOnSurface"
+                    android:text="First Name"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColor="@color/textSecondary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_profile_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="@dimen/spacing_vertical"
+                    android:textSize="@dimen/text_size_body"
+                    android:textColor="@color/textPrimary"
+                    android:paddingVertical="12dp" />
+
+                <!-- Last Name Field -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColor="@color/textSecondary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_profile_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="@dimen/spacing_vertical"
+                    android:textSize="@dimen/text_size_body"
+                    android:textColor="@color/textPrimary"
+                    android:paddingVertical="12dp" />
+
+                <!-- Email Field -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColor="@color/textSecondary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -67,17 +108,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                    android:textColor="@color/colorOnSurfaceVariant" />
+                    android:layout_marginBottom="@dimen/spacing_vertical"
+                    android:textSize="@dimen/text_size_body"
+                    android:textColor="@color/textPrimary"
+                    android:paddingVertical="12dp" />
 
+                <!-- Phone Field -->
                 <TextView
-                    android:id="@+id/text_profile_phone_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/profile_contact_header"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:text="Phone"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColor="@color/textSecondary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -85,56 +127,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                    android:textColor="@color/colorOnSurface" />
-
-                <TextView
-                    android:id="@+id/text_profile_device_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/profile_device_header"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/text_profile_device"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                    android:textColor="@color/colorOnSurface" />
-
-                <TextView
-                    android:id="@+id/text_profile_created_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/profile_created_header"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/text_profile_created"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                    android:textColor="@color/colorOnSurface" />
+                    android:textSize="@dimen/text_size_body"
+                    android:textColor="@color/textPrimary"
+                    android:paddingVertical="12dp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Edit Profile Button - Primary Purple -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_edit_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_height="@dimen/size_button_height"
+            android:layout_marginBottom="@dimen/spacing_vertical"
             android:text="@string/profile_edit_action"
-            style="@style/Widget.QuantiAgents.Button.Black"/>
+            android:textSize="@dimen/text_size_body"
+            android:textStyle="bold"
+            android:textColor="@color/white_background"
+            app:backgroundTint="@color/primary_purple"
+            app:cornerRadius="@dimen/radius_button" />
+
+        <!-- Delete Profile Button - Outlined Red -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_delete_profile"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_button_height"
+            android:text="@string/settings_delete_action"
+            android:textSize="@dimen/text_size_body"
+            android:textStyle="bold"
+            android:textColor="@color/error_red"
+            app:strokeColor="@color/error_red"
+            app:cornerRadius="@dimen/radius_button" />
 
     </LinearLayout>
 

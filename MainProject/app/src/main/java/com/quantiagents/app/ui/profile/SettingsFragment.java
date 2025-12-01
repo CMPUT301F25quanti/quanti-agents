@@ -50,7 +50,6 @@ public class SettingsFragment extends Fragment {
         userService = app.locator().userService();
         loginService = app.locator().loginService();
         notificationSwitch = view.findViewById(R.id.switch_notifications);
-        MaterialButton deleteButton = view.findViewById(R.id.button_delete_profile);
         notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (suppressSwitchListener) {
                 return;
@@ -68,7 +67,6 @@ public class SettingsFragment extends Fragment {
                     })
             );
         });
-        deleteButton.setOnClickListener(v -> confirmDeletion());
     }
 
     /**

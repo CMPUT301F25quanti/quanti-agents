@@ -374,21 +374,33 @@
                     android:layout_marginTop="24dp"
                     android:orientation="vertical">
 
+                    <!-- Join Lottery Button - Filled Purple -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_join_waitlist"
-                        style="@style/Widget.QuantiAgents.Button.Red"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/size_button_height"
+                        android:layout_marginTop="24dp"
                         android:text="@string/view_event_join_waitlist"
+                        android:textSize="@dimen/text_size_body"
+                        android:textStyle="bold"
+                        android:textColor="@color/white_background"
+                        app:backgroundTint="@color/primary_purple"
+                        app:cornerRadius="@dimen/radius_button"
                         android:visibility="gone" />
 
+                    <!-- Withdraw Button - Outlined Grey -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_leave_waitlist"
-                        style="@style/Widget.QuantiAgents.Button.Tonal"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_height="@dimen/size_button_height"
+                        android:layout_marginTop="16dp"
                         android:text="@string/view_event_leave_waitlist"
+                        android:textSize="@dimen/text_size_body"
+                        android:textStyle="bold"
+                        android:textColor="@color/textPrimary"
+                        app:strokeColor="@color/light_grey_border"
+                        app:cornerRadius="@dimen/radius_button"
                         android:visibility="gone" />
 
                     <com.google.android.material.button.MaterialButton

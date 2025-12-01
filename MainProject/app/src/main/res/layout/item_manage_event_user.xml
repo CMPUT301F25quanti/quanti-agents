@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginHorizontal="0dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:elevation="2dp">
+    app:cardBackgroundColor="@color/white_background"
+    app:strokeColor="@color/light_grey_border"
+    app:strokeWidth="@dimen/card_border_width"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="@dimen/spacing_card_padding_large"
         android:gravity="center_vertical">
 
         <!-- Text block (name + info) -->
@@ -22,37 +26,78 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Line 1: Name -->
+            <!-- Name -->
             <TextView
                 android:id="@+id/text_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="John Doe"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#424242" />
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="4dp" />
 
-            <!-- Line 2 + 3 (set with \n in adapter) -->
+            <!-- Email -->
             <TextView
-                android:id="@+id/text_user_info"
+                android:id="@+id/text_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Username: @johndoe&#10;Joined: 2025-01-23"
-                android:textSize="14sp"
-                android:textColor="#757575" />
+                android:text="email@example.com"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/textSecondary"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Phone -->
+            <TextView
+                android:id="@+id/text_user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1 234-567-8900"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/textSecondary" />
         </LinearLayout>
 
-        <!-- Delete / cancel button on the right -->
-        <ImageButton
-            android:id="@+id/button_cancel_user"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_delete_red_24dp"
-            android:contentDescription="@string/manage_event_cancel_user"
-            android:visibility="gone" />
+        <!-- Status Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Waiting"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/background_grey"
+            app:chipCornerRadius="@dimen/chip_radius"
+            app:chipMinHeight="24dp" />
+
+        <!-- Action Icons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/button_promote"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/arrow_up_float"
+                android:contentDescription="Promote"
+                android:visibility="gone"
+                app:tint="@color/success_green" />
+
+            <ImageButton
+                android:id="@+id/button_cancel_user"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_delete_red_24dp"
+                android:contentDescription="@string/manage_event_cancel_user"
+                app:tint="@color/error_red" />
+        </LinearLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

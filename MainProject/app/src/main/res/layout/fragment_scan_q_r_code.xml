@@ -7,192 +7,193 @@
     android:fillViewport="true"
     tools:context=".ui.ScanQRCode.ScanQRCodeFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/spacing_outer">
 
-        <!-- Header Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Instruction Text - Top, Centered -->
+        <TextView
+            android:id="@+id/text_instruction"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="24dp">
+            android:text="Point camera at QR code"
+            android:textSize="@dimen/text_size_body"
+            android:textStyle="bold"
+            android:textColor="@color/textSecondary"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/scan_qr_title"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorOnSurface"
-                android:layout_marginBottom="4dp" />
+        <!-- Camera Preview - Centered, Square 300dp -->
+        <FrameLayout
+            android:id="@+id/frame_camera_preview"
+            android:layout_width="@dimen/size_camera_preview"
+            android:layout_height="@dimen/size_camera_preview"
+            android:background="@android:color/black"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_instruction">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- Border overlay -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/qr_scanner_overlay"
+                android:layout_margin="2dp" />
+        </FrameLayout>
+
+        <!-- Round Scan Button - Below Camera -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_scan"
+            android:layout_width="@dimen/size_scan_button"
+            android:layout_height="@dimen/size_scan_button"
+            android:layout_marginTop="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:padding="0dp"
+            app:backgroundTint="@color/primary_purple"
+            app:cornerRadius="@dimen/size_scan_button"
+            app:icon="@android:drawable/ic_menu_camera"
+            app:iconTint="@color/white_background"
+            app:iconSize="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frame_camera_preview" />
+
+        <!-- Manual Entry Section - Bottom -->
+        <LinearLayout
+            android:id="@+id/layout_manual_entry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_outer"
+            android:layout_marginEnd="@dimen/spacing_outer"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_scan">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/scan_qr_subtitle"
-                android:textSize="14sp"
-                android:textColor="@color/colorOnSurfaceVariant" />
+                android:layout_weight="1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxCornerRadiusTopStart="@dimen/radius_input"
+                app:boxCornerRadiusTopEnd="@dimen/radius_input"
+                app:boxCornerRadiusBottomStart="@dimen/radius_input"
+                app:boxCornerRadiusBottomEnd="@dimen/radius_input"
+                app:boxStrokeColor="@color/light_grey_border"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/textHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/qrCodeInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/scan_qr_input_hint"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="12dp"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColorHint="@color/textHint" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/searchButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_button_height"
+                android:layout_marginStart="8dp"
+                android:text="@string/scan_qr_search_button"
+                android:textColor="@color/textPrimary"
+                app:strokeColor="@color/light_grey_border"
+                app:cornerRadius="@dimen/radius_button" />
         </LinearLayout>
 
-        <!-- QR Code Scanner Card -->
+        <!-- Error Alert -->
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+            android:id="@+id/errorCard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
+            android:layout_marginStart="@dimen/spacing_outer"
+            android:layout_marginEnd="@dimen/spacing_outer"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/background_grey"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_manual_entry">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/errorText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/scan_qr_card_title"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorOnSurface"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/scan_qr_card_description"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Camera Preview Container -->
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_marginBottom="16dp">
-
-                    <androidx.camera.view.PreviewView
-                        android:id="@+id/previewView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <!-- Scanning overlay (optional visual indicator) -->
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/qr_scanner_overlay"
-                        android:visibility="gone" />
-                </FrameLayout>
-
-                <!-- Manual Input Section -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/scan_qr_manual_label"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorOnSurface"
-                        android:layout_marginBottom="8dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:hint="@string/scan_qr_input_hint"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/qrCodeInput"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:maxLines="1" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/searchButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/scan_qr_search_button"
-                            android:layout_marginStart="8dp" />
-                    </LinearLayout>
-
-                    <!-- Error Alert -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/errorCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:visibility="gone"
-                        app:cardBackgroundColor="@color/colorSurfaceVariant"
-                        app:cardCornerRadius="4dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="12dp"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:id="@+id/errorText"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:textColor="@color/error_red"
+                    android:textSize="@dimen/text_size_caption" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Quick Access Section -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/quickAccessCard"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_outer"
+            android:layout_marginEnd="@dimen/spacing_outer"
+            android:layout_marginTop="24dp"
             android:visibility="gone"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
+            app:cardBackgroundColor="@color/white_background"
+            app:strokeColor="@color/light_grey_border"
+            app:strokeWidth="@dimen/card_border_width"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="@dimen/card_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/errorCard"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/spacing_card_padding_large">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/scan_qr_quick_access_title"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_heading"
                     android:textStyle="bold"
-                    android:textColor="@color/colorOnSurface"
+                    android:textColor="@color/textPrimary"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/scan_qr_quick_access_description"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="@dimen/text_size_caption"
+                    android:textColor="@color/textSecondary"
                     android:layout_marginBottom="16dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -201,5 +202,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

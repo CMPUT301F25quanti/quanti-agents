@@ -33,21 +33,37 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public int getItemCount() { return notificationList.size(); }
 
     static class NotificationViewHolder extends RecyclerView.ViewHolder {
-        final TextView titleTextView;
-        final TextView detailsTextView;
+        final TextView timestampTextView;
+        final TextView senderReceiverTextView;
+        final TextView messageTextView;
 
         NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.text_view_notification_title);
-            detailsTextView = itemView.findViewById(R.id.text_view_notification_details);
+            timestampTextView = itemView.findViewById(R.id.text_view_notification_timestamp);
+            senderReceiverTextView = itemView.findViewById(R.id.text_view_notification_sender_receiver);
+            messageTextView = itemView.findViewById(R.id.text_view_notification_message);
         }
 
         void bind(final Notification notification) {
-            String type = notification.getType() != null ? notification.getType().toString() : "UNKNOWN";
-            titleTextView.setText(type);
+            // Format timestamp
+            if (notification.getTimestamp() != null) {
+                java.text.DateFormat format = java.text.DateFormat.getDateTimeInstance(
+                    java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT);
+                timestampTextView.setText(format.format(notification.getTimestamp()));
+            } else {
+                timestampTextView.setText("N/A");
+            }
 
-            String details = "ID: " + notification.getNotificationId() + " | To: " + notification.getRecipientId();
-            detailsTextView.setText(details);
+            // Format sender -> receiver (both are int primitives, can't be null)
+            String sender = String.valueOf(notification.getSenderId());
+            String receiver = String.valueOf(notification.getRecipientId());
+            senderReceiverTextView.setText(sender + " → " + receiver);
+
+            // Format message
+            String type = notification.getType() != null ? notification.getType().toString() : "UNKNOWN";
+            String status = notification.getStatus() != null ? notification.getStatus() : "";
+            String details = notification.getDetails() != null ? notification.getDetails() : "";
+            messageTextView.setText(type + ": " + status + " - " + details);
         }
     }
 }

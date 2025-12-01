@@ -10,24 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Light Blue Header Bar -->
+        <!-- Purple Header Bar - Design System -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/buttonTextWhite"
-            android:paddingStart="16dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="12dp"
+            android:background="@color/white_background"
+            android:paddingStart="@dimen/appbar_padding_horizontal"
+            android:paddingTop="@dimen/appbar_padding_vertical"
+            android:paddingEnd="@dimen/appbar_padding_horizontal"
+            android:paddingBottom="@dimen/appbar_padding_vertical"
             android:gravity="center_vertical"
-            android:minHeight="56dp">
+            android:minHeight="@dimen/appbar_height">
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_logo_ticket" />
+                android:src="@drawable/ic_logo_ticket"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -36,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_title"
+                android:textColor="@color/primary_purple"
                 android:textStyle="bold" />
 
             <ImageButton
@@ -47,7 +49,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Menu"
                 android:src="@drawable/ic_menu"
-                app:tint="@color/colorPrimary" />
+                app:tint="@color/primary_purple" />
 
         </LinearLayout>
 

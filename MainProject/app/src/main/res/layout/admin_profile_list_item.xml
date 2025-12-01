@@ -1,37 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:layout_marginHorizontal="0dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/white_background"
+    app:strokeColor="@color/light_grey_border"
+    app:strokeWidth="@dimen/card_border_width"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_card_padding_large"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/item_profile_name"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile Name"
+                android:textSize="@dimen/text_size_heading"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/item_profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email@example.com"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/textSecondary"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile Name"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/item_profile_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="email@example.com"
-            android:textSize="14sp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_view_history_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_button_height_medium"
+                android:text="View History"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/textPrimary"
+                app:strokeColor="@color/light_grey_border"
+                app:cornerRadius="@dimen/radius_button"
+                android:layout_marginEnd="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_button_height_medium"
+                android:text="Delete"
+                android:textSize="@dimen/text_size_caption"
+                android:textStyle="bold"
+                android:textColor="@color/white_background"
+                app:backgroundTint="@color/error_red"
+                app:cornerRadius="@dimen/radius_button" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <Button
-        android:id="@+id/item_delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"/>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

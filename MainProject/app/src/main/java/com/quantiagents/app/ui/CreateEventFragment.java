@@ -66,7 +66,9 @@ public class CreateEventFragment extends Fragment {
 
     private SwitchMaterial geolocationSwitch;
     private MaterialButton createButton;
-    private MaterialButton uploadPosterButton;
+    private com.google.android.material.card.MaterialCardView cardPosterUpload;
+    private android.widget.ImageView imagePosterPreview;
+    private android.widget.ImageView iconUpload;
 
     // Image Selection
     private Uri selectedPosterUri;
@@ -82,8 +84,12 @@ public class CreateEventFragment extends Fragment {
         pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if (uri != null) {
                 selectedPosterUri = uri;
-                uploadPosterButton.setText("Poster Selected");
-                uploadPosterButton.setIconResource(R.drawable.ic_check); // Assumes ic_check exists
+                // Show preview image and hide upload icon
+                if (imagePosterPreview != null && iconUpload != null) {
+                    imagePosterPreview.setImageURI(uri);
+                    imagePosterPreview.setVisibility(View.VISIBLE);
+                    iconUpload.setVisibility(View.GONE);
+                }
             } else {
                 Log.d("CreateEvent", "No media selected");
             }
@@ -105,7 +111,7 @@ public class CreateEventFragment extends Fragment {
         bindViews(view);
         setupDatePickers();
 
-        uploadPosterButton.setOnClickListener(v ->
+        cardPosterUpload.setOnClickListener(v ->
                 pickMedia.launch(new PickVisualMediaRequest.Builder()
                         .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                         .build()));
@@ -139,7 +145,9 @@ public class CreateEventFragment extends Fragment {
 
         geolocationSwitch = view.findViewById(R.id.switch_geolocation);
         createButton = view.findViewById(R.id.button_create_event);
-        uploadPosterButton = view.findViewById(R.id.button_upload_poster);
+        cardPosterUpload = view.findViewById(R.id.card_poster_upload);
+        imagePosterPreview = view.findViewById(R.id.image_poster_preview);
+        iconUpload = view.findViewById(R.id.icon_upload);
     }
 
     private void setupDatePickers() {
@@ -316,7 +324,11 @@ public class CreateEventFragment extends Fragment {
         capacityField.setText(""); priceField.setText("");
         waitingListField.setText(""); locationField.setText("");
         geolocationSwitch.setChecked(false);
-        uploadPosterButton.setText(R.string.create_event_poster_label);
+        // Reset poster upload UI
+        if (imagePosterPreview != null && iconUpload != null) {
+            imagePosterPreview.setVisibility(View.GONE);
+            iconUpload.setVisibility(View.VISIBLE);
+        }
         selectedPosterUri = null;
         clearErrors();
     }

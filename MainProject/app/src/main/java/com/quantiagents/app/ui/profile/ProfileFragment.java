@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.quantiagents.app.App;
 import com.quantiagents.app.R;
 import com.quantiagents.app.Services.LoginService; // ADDED
@@ -21,18 +22,14 @@ import com.quantiagents.app.models.User;
 import com.quantiagents.app.Services.UserService;
 import com.quantiagents.app.ui.auth.SignUpActivity;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 public class ProfileFragment extends Fragment {
 
     private UserService userService;
     private LoginService loginService;
-    private TextView nameView;
+    private TextView firstNameView;
+    private TextView lastNameView;
     private TextView emailView;
     private TextView phoneView;
-    private TextView deviceView;
-    private TextView createdView;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -51,13 +48,14 @@ public class ProfileFragment extends Fragment {
         userService = app.locator().userService();
         loginService = app.locator().loginService();
 
-        nameView = view.findViewById(R.id.text_profile_name);
+        firstNameView = view.findViewById(R.id.text_profile_first_name);
+        lastNameView = view.findViewById(R.id.text_profile_last_name);
         emailView = view.findViewById(R.id.text_profile_email);
         phoneView = view.findViewById(R.id.text_profile_phone);
-        deviceView = view.findViewById(R.id.text_profile_device);
-        createdView = view.findViewById(R.id.text_profile_created);
         MaterialButton editButton = view.findViewById(R.id.button_edit_profile);
         editButton.setOnClickListener(v -> openEdit());
+        MaterialButton deleteButton = view.findViewById(R.id.button_delete_profile);
+        deleteButton.setOnClickListener(v -> confirmDeletion());
     }
 
     @Override
@@ -94,27 +92,59 @@ public class ProfileFragment extends Fragment {
     }
 
     private void populateUI(User user) {
-        nameView.setText(user.getName());
-        emailView.setText(user.getEmail());
+        // Split name into first and last name
+        String fullName = user.getName() != null ? user.getName().trim() : "";
+        String[] nameParts = fullName.split(" ", 2);
+        if (nameParts.length > 0) {
+            firstNameView.setText(nameParts[0]);
+        } else {
+            firstNameView.setText("");
+        }
+        if (nameParts.length > 1) {
+            lastNameView.setText(nameParts[1]);
+        } else {
+            lastNameView.setText("");
+        }
+
+        emailView.setText(user.getEmail() != null ? user.getEmail() : "");
         if (TextUtils.isEmpty(user.getPhone())) {
             phoneView.setText(R.string.profile_phone_placeholder);
         } else {
             phoneView.setText(user.getPhone());
         }
-        deviceView.setText(user.getDeviceId());
-
-        // Handling potential null/string conversion for date
-        if (user.getCreatedOn() != null) {
-            try {
-                DateFormat format = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
-                createdView.setText(format.format(new Date(System.currentTimeMillis())));
-            } catch (Exception e) {
-                createdView.setText("N/A");
-            }
-        }
     }
 
     private void openEdit() {
         startActivity(new Intent(requireContext(), EditProfileActivity.class));
+    }
+
+    /**
+     * Shows the confirmation dialog before we wipe the profile.
+     */
+    private void confirmDeletion() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.delete_profile_title)
+                .setMessage(R.string.delete_profile_body)
+                .setPositiveButton(R.string.delete_profile_confirm, (dialog, which) -> deleteProfile())
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    /**
+     * Clears local session, deletes the profile, and routes back to sign-up.
+     */
+    private void deleteProfile() {
+        loginService.logout();
+        userService.deleteUserProfile(
+                aVoid -> {
+                    ((App) requireActivity().getApplication()).locator().deviceIdManager().reset();
+                    Toast.makeText(requireContext(), R.string.message_profile_deleted, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(requireContext(), SignUpActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    requireActivity().finish();
+                },
+                e -> Toast.makeText(requireContext(), R.string.error_profile_missing, Toast.LENGTH_SHORT).show()
+        );
     }
 }
